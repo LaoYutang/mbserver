@@ -13,7 +13,7 @@ type RTUFrame struct {
 	CRC      uint16
 }
 
-// NewRTUFrame converts a packet to a Modbus TCP frame.
+// NewRTUFrame converts a packet to a Modbus RTU frame.
 func NewRTUFrame(packet []byte) (*RTUFrame, error) {
 	// Check the that the packet length.
 	if len(packet) < 5 {
@@ -76,6 +76,10 @@ func (frame *RTUFrame) GetData() []byte {
 // accordingly.
 func (frame *RTUFrame) SetData(data []byte) {
 	frame.Data = data
+}
+
+func (frame *RTUFrame) GetAddress() uint8 {
+	return frame.Address
 }
 
 // SetException sets the Modbus exception code in the frame.
